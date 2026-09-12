@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 25px;
             line-height: 1.6;
@@ -20,10 +20,11 @@
 
         h1 {
             margin-bottom: 5px;
+            font-size: 38px;
         }
 
         h2 {
-            margin-top: 50px;
+            margin-top: 55px;
             padding-bottom: 8px;
             border-bottom: 2px solid #ddd;
         }
@@ -41,6 +42,13 @@
         .authors {
             font-size: 17px;
             margin-bottom: 35px;
+        }
+
+        .text-box {
+            background: #f6f8fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 15px 0 25px 0;
         }
 
         table {
@@ -61,14 +69,15 @@
         }
 
         audio {
-            width: 190px;
+            width: 210px;
+            max-width: 100%;
         }
 
-        .text-box {
-            background: #f6f8fa;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin: 15px 0;
+        .reference {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-top: 20px;
         }
 
         .note {
@@ -83,257 +92,275 @@
             color: #777;
             text-align: center;
         }
+
+        @media (max-width: 850px) {
+            table {
+                font-size: 14px;
+            }
+
+            audio {
+                width: 150px;
+            }
+        }
     </style>
 </head>
 
 
 <body>
 
-    <h1>EMT-TTS</h1>
+<h1>EMT-TTS</h1>
 
-    <div class="subtitle">
-        Emotion Modulation and Trajectory Analysis for
-        Stable Intensity-Controlled Zero-Shot TTS
-    </div>
+<div class="subtitle">
+    Emotion Modulation and Trajectory Analysis for
+    Stable Intensity-Controlled Zero-Shot TTS
+</div>
 
-    <div class="authors">
-        <strong>Chi-Chen Huang</strong>, Chia-Ping Chen<br>
-        National Sun Yat-sen University
-    </div>
+<div class="authors">
+    <strong>Chi-Chen Huang</strong>, Chia-Ping Chen<br>
+    Department of Computer Science and Engineering<br>
+    National Sun Yat-sen University
+</div>
 
 
-    <!-- ========================= -->
-    <!-- Reference Audio -->
-    <!-- ========================= -->
+<!-- ====================================================== -->
+<!-- Reference Audio -->
+<!-- ====================================================== -->
 
-    <h2>Reference Audio</h2>
+<h2>Reference Speech</h2>
 
-    <p>
-        The following neutral speech is used as the reference speaker prompt.
-    </p>
+<p>
+    The following neutral speech is used as the reference speaker prompt
+    for zero-shot speech synthesis.
+</p>
 
-    <audio controls preload="none">
-        <source src="neutral_rio.wav" type="audio/wav">
-        Your browser does not support audio playback.
+<div class="text-box">
+    <strong>Reference text:</strong><br>
+    過了好一會兒，小男孩突然站了起來，他想跟村民們開一個玩笑
+</div>
+
+<div class="reference">
+
+    <strong>Reference Audio</strong><br><br>
+
+    <audio controls preload="metadata">
+        <source src="git_demo/狼來了_短_無音2.wav" type="audio/wav">
+        Your browser does not support the audio element.
     </audio>
 
+</div>
+
+
+
+<!-- ====================================================== -->
+<!-- Fine-grained Emotion Intensity Control -->
+<!-- ====================================================== -->
+
+<h2>1. Fine-grained Emotion Intensity Control</h2>
+
+<p>
+    ECM enables continuous control over the strength of the target
+    emotion while preserving the reference speaker identity.
+</p>
+
+<div class="text-box">
+    <strong>Synthesis text:</strong><br>
+    阿明回家，看到最愛的手辦被摔碎，氣到大吼：「誰做的！」
+</div>
+
+
+<!-- Angry -->
+
+<h3>Angry</h3>
+
+<table>
+    <tr>
+        <th>Intensity 1</th>
+        <th>Intensity 2</th>
+        <th>Intensity 5</th>
+        <th>Intensity 10</th>
+    </tr>
+
+    <tr>
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/angry1.wav" type="audio/wav">
+            </audio>
+        </td>
+
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/angry2.wav" type="audio/wav">
+            </audio>
+        </td>
+
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/angry5.wav" type="audio/wav">
+            </audio>
+        </td>
+
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/angry10.wav" type="audio/wav">
+            </audio>
+        </td>
+    </tr>
+</table>
+
+
+<!-- Happy -->
+
+<h3>Happy</h3>
+
+<table>
+    <tr>
+        <th>Intensity 1</th>
+        <th>Intensity 2</th>
+        <th>Intensity 5</th>
+        <th>Intensity 10</th>
+    </tr>
+
+    <tr>
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/happy1.wav" type="audio/wav">
+            </audio>
+        </td>
+
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/happy2.wav" type="audio/wav">
+            </audio>
+        </td>
+
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/happy5.wav" type="audio/wav">
+            </audio>
+        </td>
+
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/happy10.wav" type="audio/wav">
+            </audio>
+        </td>
+    </tr>
+</table>
+
 
+<!-- Sad -->
 
-    <!-- ========================= -->
-    <!-- Intensity Control -->
-    <!-- ========================= -->
+<h3>Sad</h3>
 
-    <h2>1. Fine-grained Emotion Intensity Control</h2>
+<table>
+    <tr>
+        <th>Intensity 1</th>
+        <th>Intensity 2</th>
+        <th>Intensity 5</th>
+        <th>Intensity 10</th>
+    </tr>
 
-    <p>
-        Audio samples generated by ECM at different user-defined
-        emotion intensities.
-    </p>
+    <tr>
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/sad1.wav" type="audio/wav">
+            </audio>
+        </td>
 
-    <div class="text-box">
-        <strong>Text:</strong>
-        Insert the synthesis text used in this experiment here.
-    </div>
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/sad2.wav" type="audio/wav">
+            </audio>
+        </td>
 
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/sad5.wav" type="audio/wav">
+            </audio>
+        </td>
 
-    <!-- Angry -->
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/sad10.wav" type="audio/wav">
+            </audio>
+        </td>
+    </tr>
+</table>
 
-    <h3>Angry</h3>
 
-    <table>
 
-        <tr>
-            <th>Intensity 1</th>
-            <th>Intensity 2</th>
-            <th>Intensity 5</th>
-            <th>Intensity 10</th>
-        </tr>
+<!-- ====================================================== -->
+<!-- Architecture Comparison -->
+<!-- ====================================================== -->
 
-        <tr>
+<h2>2. Emotion Conditioning Architecture Comparison</h2>
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/angry1.wav" type="audio/wav">
-                </audio>
-            </td>
+<p>
+    Comparison of the three emotion-conditioning architectures
+    under the same acoustic backbone.
+</p>
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/angry2.wav" type="audio/wav">
-                </audio>
-            </td>
+<div class="text-box">
+    <strong>Synthesis text:</strong><br>
+    阿明回家，看到最愛的手辦被摔碎，氣到大吼：「誰做的！」
+</div>
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/angry5.wav" type="audio/wav">
-                </audio>
-            </td>
+<h3>Angry</h3>
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/angry10.wav" type="audio/wav">
-                </audio>
-            </td>
+<table>
 
-        </tr>
+    <tr>
+        <th>ECM</th>
+        <th>D-ECM</th>
+        <th>F-ECM</th>
+    </tr>
 
-    </table>
+    <tr>
 
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/ecm/angry10.wav" type="audio/wav">
+            </audio>
+        </td>
 
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/decm/angry2.wav" type="audio/wav">
+            </audio>
+        </td>
 
-    <!-- Happy -->
+        <td>
+            <audio controls preload="metadata">
+                <source src="git_demo/fecm/angry10.wav" type="audio/wav">
+            </audio>
+        </td>
 
-    <h3>Happy</h3>
+    </tr>
 
-    <table>
+</table>
 
-        <tr>
-            <th>Intensity 1</th>
-            <th>Intensity 2</th>
-            <th>Intensity 5</th>
-            <th>Intensity 10</th>
-        </tr>
 
-        <tr>
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/happy1.wav" type="audio/wav">
-                </audio>
-            </td>
+<!-- ====================================================== -->
+<!-- Mixed Emotion -->
+<!-- ====================================================== -->
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/happy2.wav" type="audio/wav">
-                </audio>
-            </td>
+<h2>3. Mixed-Emotion Synthesis</h2>
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/happy5.wav" type="audio/wav">
-                </audio>
-            </td>
+<p>
+    Mixed-emotion synthesis is performed using shared-state
+    ODE vector-field composition.
+</p>
 
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/happy10.wav" type="audio/wav">
-                </audio>
-            </td>
+<p class="note">
+    Additional mixed-emotion audio demonstrations will be added here.
+</p>
 
-        </tr>
 
-    </table>
 
-
-
-    <!-- Sad -->
-
-    <h3>Sad</h3>
-
-    <table>
-
-        <tr>
-            <th>Intensity 1</th>
-            <th>Intensity 2</th>
-            <th>Intensity 5</th>
-            <th>Intensity 10</th>
-        </tr>
-
-        <tr>
-
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/sad1.wav" type="audio/wav">
-                </audio>
-            </td>
-
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/sad2.wav" type="audio/wav">
-                </audio>
-            </td>
-
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/sad5.wav" type="audio/wav">
-                </audio>
-            </td>
-
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/sad10.wav" type="audio/wav">
-                </audio>
-            </td>
-
-        </tr>
-
-    </table>
-
-
-
-    <!-- ========================= -->
-    <!-- Architecture Comparison -->
-    <!-- ========================= -->
-
-    <h2>2. Emotion Conditioning Architecture Comparison</h2>
-
-    <p>
-        Comparison between different emotion-conditioning architectures.
-    </p>
-
-    <table>
-
-        <tr>
-            <th>ECM</th>
-            <th>D-ECM</th>
-            <th>F-ECM</th>
-        </tr>
-
-        <tr>
-
-            <td>
-                <audio controls preload="none">
-                    <source src="ecm/angry10.wav" type="audio/wav">
-                </audio>
-            </td>
-
-            <td>
-                <audio controls preload="none">
-                    <source src="decm/angry2.wav" type="audio/wav">
-                </audio>
-            </td>
-
-            <td>
-                <audio controls preload="none">
-                    <source src="fecm/angry10.wav" type="audio/wav">
-                </audio>
-            </td>
-
-        </tr>
-
-    </table>
-
-
-    <!-- ========================= -->
-    <!-- Mixed Emotion -->
-    <!-- ========================= -->
-
-    <h2>3. Mixed-Emotion Synthesis</h2>
-
-    <p>
-        Audio examples demonstrating mixed-emotion synthesis using
-        shared-state ODE vector-field composition.
-    </p>
-
-    <p class="note">
-        Mixed-emotion samples will be added here.
-    </p>
-
-
-
-    <footer>
-        EMT-TTS Audio Demo · Chi-Chen Huang
-    </footer>
+<footer>
+    EMT-TTS Audio Demo · Chi-Chen Huang
+</footer>
 
 </body>
 
